@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light Theme (default) */
+    --macos-bg: #f5f7fa;
+    --macos-window: #ffffff;
+    --macos-text: #333333;
+    --macos-accent: #007aff;
+    --macos-secondary: #8e8e93;
+    --macos-border: #e2e2e7;
+    --macos-highlight: #e9f0fd;
+    --macos-shadow: rgba(0, 0, 0, 0.08);
+    --macos-radius: 10px;
+    --em-dash-color: #007aff;
+    --window-header-bg: #f5f5f7;
+    --key-combo-bg: #f1f1f4;
+    --footer-bg: #f9f9fa;
+    --cheat-item-bg: #ffffff;
+    --header-bg-start: #f9f9f9;
+    --header-bg-end: #efefef;
+    --header-text: #333333;
+}
+
+/* Dark Theme */
+.dark-theme {
+    --macos-bg: #1e1e1e;
+    --macos-window: #323232;
+    --macos-text: #e8e8e8;
+    --macos-accent: #0a84ff;
+    --macos-secondary: #98989d;
+    --macos-border: #444444;
+    --macos-highlight: #2a3342;
+    --macos-shadow: rgba(0, 0, 0, 0.3);
+    --em-dash-color: #0a84ff;
+    --window-header-bg: #323232;
+    --key-combo-bg: #444444;
+    --footer-bg: #2d2d2d;
+    --cheat-item-bg: #3a3a3a;
+    --header-bg-start: #383838;
+    --header-bg-end: #2d2d2d;
+    --header-text: #e8e8e8;
+}
+
+/* Auto theme detection */
+@media (prefers-color-scheme: dark) {
+    :root:not(.light-theme) {
+        --macos-bg: #1e1e1e;
+        --macos-window: #323232;
+        --macos-text: #e8e8e8;
+        --macos-accent: #0a84ff;
+        --macos-secondary: #98989d;
+        --macos-border: #444444;
+        --macos-highlight: #2a3342;
+        --macos-shadow: rgba(0, 0, 0, 0.3);
+        --em-dash-color: #0a84ff;
+        --window-header-bg: #323232;
+        --key-combo-bg: #444444;
+        --footer-bg: #2d2d2d;
+        --cheat-item-bg: #3a3a3a;
+        --header-bg-start: #383838;
+        --header-bg-end: #2d2d2d;
+        --header-text: #e8e8e8;
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--macos-text);
+    background-color: var(--macos-bg);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--macos-window);
+    border-radius: var(--macos-radius);
+    box-shadow: 0 2px 10px var(--macos-shadow);
+    overflow: hidden;
+    border: 1px solid var(--macos-border);
+    transition: all 0.3s ease;
+}
+
+/* macOS Window Header */
+.window-header {
+    height: 38px;
+    background-color: var(--window-header-bg);
+    border-bottom: 1px solid var(--macos-border);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.window-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--macos-secondary);
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.window-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.window-button.close {
+    background-color: #ff5f57;
+    border: 1px solid #e0443e;
+}
+
+.window-button.minimize {
+    background-color: #ffbd2e;
+    border: 1px solid #dea123;
+}
+
+.window-button.maximize {
+    background-color: #28c941;
+    border: 1px solid #1db93c;
+}
+
+header {
+    background: linear-gradient(to bottom, var(--header-bg-start), var(--header-bg-end));
+    color: var(--header-text);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--macos-border);
+    transition: all 0.3s ease;
+}
+
+.language-selector {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 135px;
+    z-index: 100;
+    background-color: var(--macos-window);
+    color: var(--macos-accent);
+    border: 1px solid var(--macos-border);
+    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.theme-toggle:hover {
+    background-color: var(--macos-highlight);
+}
+
+.language-selector select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: var(--macos-window);
+    color: var(--macos-text);
+    border: 1px solid var(--macos-border);
+    font-size: 13px;
+    font-weight: 500;
+    min-width: 100px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007aff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px auto;
+    padding-right: 28px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.em-dash-display {
+    font-size: 3.5rem;
+    color: var(--em-dash-color);
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+.content {
+    padding: 25px;
+}
+
+.breadcrumbs {
+    margin-bottom: 20px;
+    color: var(--macos-secondary);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbs a {
+    color: var(--macos-accent);
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+    margin: 0 8px;
+    color: var(--macos-secondary);
+}
+
+.cheat-sheet {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cheat-item {
+    background-color: var(--cheat-item-bg);
+    border: 1px solid var(--macos-border);
+    border-radius: 8px;
+    padding: 15px;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.cheat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--macos-shadow);
+    border-color: var(--macos-accent);
+}
+
+h2 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--macos-text);
+    font-weight: 600;
+}
+
+.key-combo {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', 'Courier New', monospace;
+    background-color: var(--key-combo-bg);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid var(--macos-border);
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--macos-text);
+    margin: 2px 2px;
+    transition: all 0.3s ease;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--macos-secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--macos-border);
+    background-color: var(--footer-bg);
+    transition: all 0.3s ease;
+}
+
+.footer-links a {
+    color: var(--macos-accent);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.about {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--macos-border);
+}
+
+.joke {
+    margin-top: 15px;
+    font-style: italic;
+    color: var(--macos-secondary);
+    background-color: var(--macos-highlight);
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid var(--macos-accent);
+}
+
+@media (max-width: 600px) {
+    .cheat-sheet {
+        grid-template-columns: 1fr;
+    }
+    
+    .language-selector {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .theme-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .window-header {
+        height: 30px;
+    }
+
+    .window-button {
+        width: 10px;
+        height: 10px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+}
